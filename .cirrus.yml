@@ -1,3 +1,11 @@
+env:
+  CC_TEST_REPORTER_ID: ENCRYPTED[3c4830d5cdc22ce02ef96ce23ba35617b0dbc0ed5df12d22e471e95199c92924984bd686ad9ed5b513eaa5f5206fe25c]
+
+prepare_codeclimate_script: |
+  curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  chmod +x ./cc-test-reporter
+  ./cc-test-reporter before-build
+
 container:
   image: cirrusci/android-sdk:30
   cpu: 4
@@ -34,6 +42,10 @@ check_android_task:
     for n in $(seq 1 20); do adb exec-out screenrecord --time-limit=180 --output-format=h264 - > $n.h264; done
   check_script:
     ./gradlew check connectedCheck
+  report_codeclimate_script: |
+    export JACOCO_SOURCE_PATH=app/src/main/java/
+    ./cc-test-reporter format-coverage ./app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml --input-type jacoco
+    ./cc-test-reporter upload-coverage
   always:
     wait_for_screenrecord_script: |
       pkill -2 -x adb

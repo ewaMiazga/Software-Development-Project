@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BootcampApp</string>
+    <string name="greeting_hint">BootcampApp</string>
+</resources>

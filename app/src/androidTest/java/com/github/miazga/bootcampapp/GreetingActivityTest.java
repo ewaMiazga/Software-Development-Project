@@ -30,6 +30,8 @@ public class GreetingActivityTest {
 
         onView(withId(R.id.textView));
         Intents.release();
+
+
     }
 
     /*@Test

@@ -27,23 +27,11 @@ public class GreetingActivityTest {
         Intents.init();
         Intent i = new Intent(ApplicationProvider.getApplicationContext(), Greeting_Activity.class);
         ActivityScenario.launch(i).close();
-
         onView(withId(R.id.textView));
         Intents.release();
 
 
     }
-
-    /*@Test
-    public void testIntentMatch() {
-        Intents.init();
-        Intent i = new Intent(ApplicationProvider.getApplicationContext(), Greeting_Activity.class);
-        ActivityScenario.launch(i).close();
-
-        onView(withId(R.id.textView))
-                .check(matches(withText("Greetings Enter your name")));
-        Intents.release();
-    }*/
 
     @Test
     public void newTest() {
